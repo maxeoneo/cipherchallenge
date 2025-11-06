@@ -1,6 +1,12 @@
 with open('cipher.txt', 'r') as file:
     data = file.read().rstrip()
 
+# Split the content by spaces and convert to integers
+integer_parts = list(map(int, data.split()))
+
+# Now you can use the integer_parts list as needed
+print(integer_parts)
+
 frequency_analysis = { "A" : 0,  "B" : 0,  "C" : 0,  "D" : 0,  "E" : 0,                      "F" : 0,  "G" : 0,
     "H" : 0,  "I" : 0,  "J" : 0,  "K" : 0,  "L" : 0,  "M" : 0,  "N" : 0,  "O" :   0,
     "P" : 0,  "Q" : 0,  "R" : 0,  "S" : 0,  "T" : 0,  "U" : 0,  "V" : 0,  "W" : 0,
@@ -37,32 +43,28 @@ for key in inorder:
         print (key)
 
 result = data
-result = result.replace('X', 'e')
-result = result.replace('J', 't')
-result = result.replace('P', 'h')
-result = result.replace('T', 'n')
-result = result.replace('B', 'i')
-result = result.replace('C', 'o')
-result = result.replace('I', 'f')
-result = result.replace('V', 'r')
-result = result.replace('M', 'a')
-result = result.replace('W', 'g')
-result = result.replace('N', 'd')
-result = result.replace('R', 's')
-result = result.replace('D', 'v')
-result = result.replace('U', 'u')
-result = result.replace('L', 'm')
-result = result.replace('Y', 'w')
-result = result.replace('A', 'c')
-result = result.replace('G', 'l')
 result = result.replace('Q', 'p')
-result = result.replace('H', 'k')
-result = result.replace('F', 'b')
-result = result.replace('E', 'y')
-result = result.replace('K', 'q')
-result = result.replace('Z', 'x')
-result = result.replace('S', 'j')
-result = result.replace('O', 'z')
+result = result.replace('C', 'i')
+result = result.replace('U', 'c')
+result = result.replace('H', 'o')
+result = result.replace('I', 't')
+result = result.replace('E', 'f')
+result = result.replace('N', 'e')
+result = result.replace('S', 'h')
+result = result.replace('G', 'm')
+result = result.replace('K', 'n')
+result = result.replace('B', 'u')
+result = result.replace('F', 'r')
+result = result.replace('P', 'x')
+result = result.replace('T', 's')
+result = result.replace('Z', 'v')
+result = result.replace('M', 'a')
+result = result.replace('X', 'l')
+result = result.replace('W', 'w')
+result = result.replace('J', 'b')
+result = result.replace('A', 'd')
+result = result.replace('D', 'g')
+result = result.replace('R', 'y')
 
 # i = 0
 # for key in inorder:

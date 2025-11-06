@@ -1,40 +1,41 @@
 import re
 from collections import Counter
 
-with open('cipher.txt', 'r') as file:
-    cipher = file.read().rstrip().replace('\n', '')
+# with open('krypton-cypher-level5.txt', 'r') as file:
+#     cipher = file.read().rstrip().replace('\n', '')
 
-print(cipher)
+# print(cipher)
 
-# Compile the regex to find repetitions of 3 or more letters
-repeater = re.compile(r"(.{3,}).*?\1")
+# # Compile the regex to find repetitions of 3 or more letters
+# repeater = re.compile(r"(.{3,}).*?\1")
 
-def repeated(s):
-    matches = repeater.findall(s)
-    for match in matches:
-        print(f"Repeated string: {match}")
-        occurences = [m.start() for m in re.finditer(match, s)]
-        print(f"Occurences: {occurences}: Difference between occurences: {occurences[1] - occurences[0]}")
-        # differences are 220, 45, 35, 130 and 10. So the key is probably 5 (shared divider)
+# def repeated(s):
+#     matches = repeater.findall(s)
+#     for match in matches:
+#         print(f"Repeated string: {match}")
+#         occurences = [m.start() for m in re.finditer(match, s)]
+#         print(f"Occurences: {occurences}: Difference between occurences: {occurences[1] - occurences[0]}")
+#         # differences are 220, 45, 35, 130 and 10. So the key is probably 5 (shared divider)
 
-repeated(cipher)
+# repeated(cipher)
 
-# split the text in 5 parts by index % 5
-def split_by_modulo(s, n):
-    parts = ['' for _ in range(n)]
-    for i, char in enumerate(s):
-        parts[i % n] += char
-    return parts
+# # split the text in 5 parts by index % 5
+# def split_by_modulo(s, n):
+#     parts = ['' for _ in range(n)]
+#     for i, char in enumerate(s):
+#         parts[i % n] += char
+#     return parts
 
-# frequency analysis each part
-def frequency_analysis(text):
-    return Counter(text)
+# # frequency analysis each part
+# def frequency_analysis(text):
+#     return Counter(text)
 
-cipher_parts = split_by_modulo(cipher, 5)
-for i, part in enumerate(cipher_parts):
-        print(f"Part {i}: {part}")
-        frequencies = frequency_analysis(part)
-        print(f"Frequencies for part {i}: {frequencies}")
+# # cipher_parts = split_by_modulo(cipher, 5)
+# cipher_parts = split_by_modulo(cipher, 6)
+# for i, part in enumerate(cipher_parts):
+#         print(f"Part {i}: {part}")
+#         frequencies = frequency_analysis(part)
+#         print(f"Frequencies for part {i}: {frequencies}")
 
 def shift_letter(letter, shift):
     if 'A' <= letter <= 'Z':
@@ -44,28 +45,36 @@ def shift_letter(letter, shift):
     else:
         return letter
 
-def shift_text(text, shift):
-    return ''.join(shift_letter(char, shift) for char in text)
+# def shift_text(text, shift):
+#     return ''.join(shift_letter(char, shift) for char in text)
 
 
-shifts = [ord('W') - ord('E'), ord('G') - ord('E'), ord('Y') - ord('E'), ord('F') - ord('E'), ord('E') - ord('E')]
+# shifts = [ord('J') - ord('E'), ord('K') - ord('E'), ord('I') - ord('E'), ord('C') - ord('E'), ord('J') - ord('E'), ord('R') - ord('E')]
 
-password = (chr(ord('A') + shifts[0]) + chr(ord('A') + shifts[1]) + chr(ord('A') + shifts[2]) + chr(ord('A') + shifts[3]) + chr(ord('A') + shifts[4]))
-print (f"Password: {password}")
-print(chr(ord('A') + shifts[0]), ord('W') - ord('E'))
-print(chr(ord('A') + shifts[1]), ord('G') - ord('E'))
-print(chr(ord('A') + shifts[2]), ord('Y') - ord('E'))
-print(chr(ord('A') + shifts[3]), ord('F') - ord('E'))
-print(chr(ord('A') + shifts[4]), ord('E') - ord('E'))
+# password = (chr(ord('A') + shifts[0]) + chr(ord('A') + shifts[1]) + chr(ord('A') + shifts[2]) + 'Y' + chr(ord('A') + shifts[4]) + chr(ord('A') + shifts[5]))
+# print (f"Password: {password}")
+# print(chr(ord('A') + shifts[0]), ord('S') - ord('E'))
+# print(chr(ord('A') + shifts[1]), ord('K') - ord('E'))
+# print(chr(ord('A') + shifts[2]), ord('I') - ord('E'))
+# print(chr(ord('A') + shifts[3]), ord('C') - ord('E'))
+# print(chr(ord('A') + shifts[4]), ord('J') - ord('E'))
+# print(chr(ord('A') + shifts[5]), ord('R') - ord('E'))
 
-cipher_parts[0] = shift_text(cipher_parts[0], -shifts[0])
-cipher_parts[1] = shift_text(cipher_parts[1], -shifts[1])
-cipher_parts[2] = shift_text(cipher_parts[2], -shifts[2])
-cipher_parts[3] = shift_text(cipher_parts[3], -shifts[3])
-cipher_parts[4] = shift_text(cipher_parts[4], -shifts[4])
+# cipher_parts[0] = shift_text(cipher_parts[0], -shifts[0])
+# cipher_parts[1] = shift_text(cipher_parts[1], -shifts[1])
+# cipher_parts[2] = shift_text(cipher_parts[2], -shifts[2])
+# cipher_parts[3] = shift_text(cipher_parts[3], -shifts[3])
+# cipher_parts[4] = shift_text(cipher_parts[4], -shifts[4])
 
-interleaved = ''.join(''.join(x) for x in zip(*cipher_parts))
+# interleaved = ''.join(''.join(x) for x in zip(*cipher_parts))
 
-plain = interleaved
-print(f"Plain text:")
-print(plain)
+# plain = interleaved
+# print(f"Plain text:")
+# print(plain)
+
+new_cypher = "rgnoDVD{O0NU_WQ3_G1G3O3T3_A1AH3S_cc82272b}"
+new_key =    "CYLABCY LABC YLA BCYLABCY LABCYL ABCYLABC "
+
+for index, letter in enumerate(new_cypher):
+    if new_key[index] != " ":
+        print(shift_letter(letter, -ord(new_key[index])))
